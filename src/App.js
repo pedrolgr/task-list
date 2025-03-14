@@ -25,7 +25,11 @@ function App() {
       }))
   }
 
-  
+  const deleteTask = (indexTask) => {
+    setTasks(prevTasks => 
+      prevTasks.filter((task, index) =>
+        index !== indexTask))
+  }
 
   return (
     <div>
@@ -51,6 +55,10 @@ function App() {
 
               {task.name}
               
+              <button
+              onClick={() => deleteTask(index)}>
+                Deletar
+              </button>
             </li>
         )}
       </ul>
