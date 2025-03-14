@@ -1,25 +1,65 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+
+  const [newTask, setNewTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+
+  const saveTask = (newTask) => {
+    if(newTask.trim() !== ''){
+      setTasks([...tasks, {name: newTask, completed: false}])
+      setNewTask('')
+    }
+    
+  }
+
+  const toggleCheckbox = (indexTask) => {
+    setTasks(prevTasks => 
+      prevTasks.map((task, index) => {
+        if(index === indexTask) {
+          return {...task, completed: !task.completed}
+        }
+
+        return task;
+      }))
+  }
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input
+      type='text'
+      value={newTask}
+      onChange={e => setNewTask(e.target.value)}></input>
+
+      <button
+      onClick={() => saveTask(newTask)}>Salvar
+      </button>
+
+      <ul>
+        {tasks.map((task, index) =>
+            <li 
+              key={index}
+              style={{textDecoration: task.completed ? 'line-through' : 'none'}}>
+              <input
+                type='checkbox'
+                checked={task.completed}
+                onChange={() => toggleCheckbox(index)}>
+              </input>
+
+              {task.name}
+              
+            </li>
+        )}
+      </ul>
     </div>
   );
 }
 
 export default App;
+
+
+
+
