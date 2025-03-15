@@ -1,18 +1,70 @@
 import React, { useState } from 'react';
+import TaskEditor from './components/TaskEditor';
+import TaskList from './components/TaskList';
+import { TasksProvider } from './context/TasksContext';
 import './App.css';
+import AddTask from './components/AddTask';
 
 function App() {
 
-  const [newTask, setNewTask] = useState('');
-  const [tasks, setTasks] = useState([]);
+  return (
+    <TasksProvider>
+      <AddTask />
+      <TaskList />
+    </TasksProvider>
+  );
+}
 
-  const saveTask = (newTask) => {
-    if(newTask.trim() !== ''){
-      setTasks([...tasks, {name: newTask, completed: false}])
-      setNewTask('')
-    }
-    
-  }
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*const [showEditor, setShowEditor] = useState(false);
+
+  const [selectedTask, setSelectedTask] = useState(null);
+
+  
 
   const toggleCheckbox = (indexTask) => {
     setTasks(prevTasks => 
@@ -27,47 +79,19 @@ function App() {
 
   const deleteTask = (indexTask) => {
     setTasks(prevTasks => 
-      prevTasks.filter((task, index) =>
+      prevTasks.filter((_, index) =>
         index !== indexTask))
   }
 
-  return (
-    <div>
-      <input
-      type='text'
-      value={newTask}
-      onChange={e => setNewTask(e.target.value)}></input>
+  const toggleEditor = (index) => {
+    setSelectedTask(index)
+    setShowEditor(!showEditor)
+  }
 
-      <button
-      onClick={() => saveTask(newTask)}>Salvar
-      </button>
-
-      <ul>
-        {tasks.map((task, index) =>
-            <li 
-              key={index}
-              style={{textDecoration: task.completed ? 'line-through' : 'none'}}>
-              <input
-                type='checkbox'
-                checked={task.completed}
-                onChange={() => toggleCheckbox(index)}>
-              </input>
-
-              {task.name}
-              
-              <button
-              onClick={() => deleteTask(index)}>
-                Deletar
-              </button>
-            </li>
-        )}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-
-
+  const updatedTask = (updateTask) => {
+    setTasks(prevTasks =>
+      prevTasks.map(())
+    )
+  }*/
 
 
