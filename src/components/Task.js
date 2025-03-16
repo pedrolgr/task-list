@@ -11,6 +11,13 @@ const Task = ({task}) => {
             t.id === task.id ? {...t, completed: !t.completed} : t
         )))
     }
+
+    const deleteTask = (task) => {
+        setTasks((prevTasks) =>
+        prevTasks.filter((t) => (
+            t.id !== task.id
+        )))
+    }
  
     return(
         <li style={{textDecoration: task.completed ? 'line-through' : 'none'}}>
@@ -22,8 +29,8 @@ const Task = ({task}) => {
             
             {task.name}
   
-              
-            <button>
+            <button
+            onClick={() => deleteTask(task)}>
                 Deletar
             </button>
 
