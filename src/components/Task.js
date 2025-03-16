@@ -13,8 +13,7 @@ const Task = ({task}) => {
     }
  
     return(
-        <li>
-            
+        <li style={{textDecoration: task.completed ? 'line-through' : 'none'}}>
             <input
                 type='checkbox'
                 checked={task.completed}
