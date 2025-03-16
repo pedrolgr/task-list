@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { TasksContext } from '../context/TasksContext';
+import TaskForm from './TaskForm';
 
 const Task = ({task}) => {
 
     const {setTasks} = useContext(TasksContext);
+    const {isTaskFormVisible, setIsTaskFormVisible} = useContext(TasksContext)
 
     const toggleCheckbox = (task) => {
         setTasks((prevTasks) =>
@@ -34,11 +36,17 @@ const Task = ({task}) => {
                 Deletar
             </button>
 
-            <button>
+            <button
+            onClick={() => setIsTaskFormVisible(prevState => !prevState)}>
                 Editar
             </button>
+
+            {isTaskFormVisible && <TaskForm task={task}/>}
+        
         </li>
     )
+
+    
 }
 
 export default Task;
