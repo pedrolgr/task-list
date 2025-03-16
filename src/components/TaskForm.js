@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import { TasksContext } from '../context/TasksContext';
 
 const TaskForm = ({ task }) => {
-    const { tasks, setTasks } = useContext(TasksContext);
-    const {isTaskFormVisible, setIsTaskFormVisible} = useContext(TasksContext)
+    const { tasks, setTasks,
+        setIsCreatingTaskFormVisible, setIsEditingTaskFormVisible
+     } = useContext(TasksContext);
     
     const [newTask, setNewTask] = useState(task ? task.name : '');
 
@@ -22,7 +23,8 @@ const TaskForm = ({ task }) => {
                 setTasks((prevTasks) => [...prevTasks, newTaskObj]);
             }
         setNewTask('');
-        setIsTaskFormVisible(prev => !prev);
+        setIsCreatingTaskFormVisible(false);
+        setIsEditingTaskFormVisible(false);
     }
   };
 

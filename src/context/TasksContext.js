@@ -5,10 +5,33 @@ export const TasksContext = createContext();
 export const TasksProvider = ({ children }) => {
 
   const [tasks, setTasks] = useState([]);
-  const [isTaskFormVisible, setIsTaskFormVisible] = useState(false);
+  const [isCreatingTaskFormVisible, setIsCreatingTaskFormVisible] = useState(false);
+  const [isEditingTaskFormVisible, setIsEditingTaskFormVisible] = useState(false);
+
+  const handleIsCreatingTaskFormVisible = () => {
+    if(isCreatingTaskFormVisible){
+      setIsEditingTaskFormVisible(false);
+    } else {
+      setIsCreatingTaskFormVisible(true);
+      setIsEditingTaskFormVisible(false);
+    }
+  }
+
+  const handleIsEditingTaskFormVisible = () => {
+    if(isEditingTaskFormVisible){
+      setIsCreatingTaskFormVisible(false);
+    } else {
+      setIsEditingTaskFormVisible(true);
+      setIsCreatingTaskFormVisible(false);
+    }
+  }
 
   return (
-    <TasksContext.Provider value={{ tasks, setTasks, isTaskFormVisible, setIsTaskFormVisible }}>
+    <TasksContext.Provider value={{ tasks, setTasks,
+      isCreatingTaskFormVisible, setIsCreatingTaskFormVisible,
+      isEditingTaskFormVisible, setIsEditingTaskFormVisible,
+      handleIsCreatingTaskFormVisible, handleIsEditingTaskFormVisible
+     }}>
       {children}
     </TasksContext.Provider>
   );

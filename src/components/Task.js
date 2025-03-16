@@ -5,7 +5,9 @@ import TaskForm from './TaskForm';
 const Task = ({task}) => {
 
     const {setTasks} = useContext(TasksContext);
-    const {isTaskFormVisible, setIsTaskFormVisible} = useContext(TasksContext)
+    const {isCreatingTaskFormVisible, setIsCreatingTaskFormVisible,
+        isEditingTaskFormVisible, setIsEditingTaskFormVisible,
+        handleIsCreatingTaskFormVisible, handleIsEditingTaskFormVisible } = useContext(TasksContext)
 
     const toggleCheckbox = (task) => {
         setTasks((prevTasks) =>
@@ -37,11 +39,11 @@ const Task = ({task}) => {
             </button>
 
             <button
-            onClick={() => setIsTaskFormVisible(prevState => !prevState)}>
+            onClick={handleIsEditingTaskFormVisible}>
                 Editar
             </button>
 
-            {isTaskFormVisible && <TaskForm task={task}/>}
+            {isEditingTaskFormVisible && <TaskForm task={task}/>}
         
         </li>
     )
