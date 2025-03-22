@@ -5,9 +5,7 @@ import { TasksContext } from '../context/TasksContext';
 
 const NewTaskButton = () => {
 
-    const {isCreatingTaskFormVisible, setIsCreatingTaskFormVisible,
-        isEditingTaskFormVisible, setIsEditingTaskFormVisible,
-        handleIsCreatingTaskFormVisible, handleIsEditingTaskFormVisible } = useContext(TasksContext)
+    const {isCreatingTaskFormVisible, handleIsCreatingTaskFormVisible } = useContext(TasksContext)
 
     return (
         <>

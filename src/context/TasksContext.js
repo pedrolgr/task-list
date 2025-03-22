@@ -7,31 +7,39 @@ export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [isCreatingTaskFormVisible, setIsCreatingTaskFormVisible] = useState(false);
   const [isEditingTaskFormVisible, setIsEditingTaskFormVisible] = useState(false);
+  const [editingTaskId, setEditingTaskId] = useState(null);
 
   const handleIsCreatingTaskFormVisible = () => {
-    if(isCreatingTaskFormVisible){
-      setIsEditingTaskFormVisible(false);
-    } else {
+    if (isCreatingTaskFormVisible) {
+      setIsEditingTaskFormVisible(prev => !isEditingTaskFormVisible);
+      setIsCreatingTaskFormVisible(prev => !isCreatingTaskFormVisible);
+      setEditingTaskId(null);
+    }
+    else {
       setIsCreatingTaskFormVisible(true);
       setIsEditingTaskFormVisible(false);
     }
-  }
+  };
 
-  const handleIsEditingTaskFormVisible = () => {
-    if(isEditingTaskFormVisible){
-      setIsCreatingTaskFormVisible(false);
-    } else {
-      setIsEditingTaskFormVisible(true);
-      setIsCreatingTaskFormVisible(false);
-    }
-  }
+  const handleIsEditingTaskFormVisible = (taskId) => {
+    setEditingTaskId(editingTaskId === taskId ? null : taskId);
+    setIsEditingTaskFormVisible(editingTaskId !== taskId);
+    if(isCreatingTaskFormVisible) setIsCreatingTaskFormVisible(false);
+  };
 
   return (
-    <TasksContext.Provider value={{ tasks, setTasks,
-      isCreatingTaskFormVisible, setIsCreatingTaskFormVisible,
-      isEditingTaskFormVisible, setIsEditingTaskFormVisible,
-      handleIsCreatingTaskFormVisible, handleIsEditingTaskFormVisible
-     }}>
+    <TasksContext.Provider value={{
+      tasks,
+      setTasks,
+      isCreatingTaskFormVisible,
+      setIsCreatingTaskFormVisible,
+      isEditingTaskFormVisible,
+      setIsEditingTaskFormVisible,
+      editingTaskId,
+      setEditingTaskId,
+      handleIsCreatingTaskFormVisible,
+      handleIsEditingTaskFormVisible
+    }}>
       {children}
     </TasksContext.Provider>
   );

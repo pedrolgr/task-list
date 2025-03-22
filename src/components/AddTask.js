@@ -8,7 +8,7 @@ const AddTask = () => {
     const [newTask, setNewTask] = useState('');
 
     const saveTask = (newTask) => {
-        if(newTask.trim() !== ''){
+        if (newTask.trim() !== '') {
         const newTaskObj = {
             id: tasks.length, 
             name: newTask, 
@@ -30,7 +30,7 @@ const AddTask = () => {
 
             <button
                 onClick={() => saveTask(newTask)}>
-                    Salvar
+                    Save
             </button>
         </div>
     );
