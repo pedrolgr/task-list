@@ -7,6 +7,7 @@ import NewTaskButton from './components/NewTaskButton';
 
 import { TasksProvider } from './context/TasksContext';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import TaskApp from './pages/TaskApp';
 
 
@@ -15,8 +16,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Login />}/>
-        <Route path='/taskapp' element={<TaskApp />}/>
+        
+        <Route path='/' element={<TaskApp />}/>
+        <Route path='/signup' element={<Signup />}/>
+        <Route path='/login' element={<Login />}/>
       </Routes>
     </Router>
 

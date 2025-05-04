@@ -1,37 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
+
         try {
-            const response = await axios.post('http://localhost:3001/login', {
+            const response = await axios.post('http://localhost:3001/signup', {
                 email,
                 password
             })
 
-            const { token } = response.data;
-
-            localStorage.setItem("token", token);
-
-            navigate('/')
-
-        } catch (e) {
+        } catch(e) {
             console.error(e)
         }
     };
 
     return (
         <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
+            <h2>Cadastro</h2>
+            <form onSubmit={handleSignup}>
                 <label htmlFor="email">Email:</label>
                 <input
                     type="email"
@@ -50,14 +43,14 @@ const Login = () => {
                     required
                 />
 
-                <button type="submit">Entrar</button>
+                <button type="submit">Cadastrar</button>
             </form>
 
             <p>
-                Não tem conta? <Link to="/signup">Cadastre-se</Link>
+                Já tem conta? <Link to="/login">Fazer login</Link>
             </p>
         </div>
-    )
+    );
 }
 
-export default Login;
+export default Signup
